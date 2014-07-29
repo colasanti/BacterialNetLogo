@@ -62,16 +62,19 @@ end
 to metabolise
   ;; bugs take up resource
   ask turtles[
-    let maxuptake 30  ;; holding resource maximum take up
-     ask patch-here[
+    ;;let maxuptake 30  ;; holding resource maximum take up
+    let maxuptake 30 * ( biomass /500 ) ;; holding resource maximum take up
+    let newbiomass maxuptake 
+    ask patch-here[
         ifelse resource > maxuptake[
-          set resource resource - maxuptake
+           set resource resource - maxuptake
+
         ][
-          set a resource  ;; take up what it can
+          set newbiomass  resource  ;; take up what it can
           set resource 0
         ] 
       ] 
-     set biomass biomass + maxuptake ;; add to biomass
+     set biomass biomass + newbiomass ;; add to biomass
   ]
 end
 
