@@ -200,17 +200,6 @@ resourceIn
 NIL
 HORIZONTAL
 
-MONITOR
-30
-215
-225
-260
-NIL
-count turtles
-17
-1
-11
-
 @#$#@#$#@
 ## WHAT IS IT?
 
