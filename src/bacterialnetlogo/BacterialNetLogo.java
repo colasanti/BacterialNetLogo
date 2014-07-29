@@ -26,18 +26,28 @@ public class BacterialNetLogo {
         try {
             workspace.open(
                     "src/bacterialnetlogo/Chemostat.nlogo");
-            for (int substrate = 1024; substrate >= 1; substrate = substrate / 2) {
-                for (int flow = 1; flow <= 100; flow++) {
+            int substrate = 1024;
+            do {
+                int flow = 100;
+                do{
                     workspace.command("set flow "+Integer.toString(flow));
                     workspace.command("set resourcein "+Integer.toString(substrate));
                     workspace.command("setup");
-                    for (int i = 0; i < 500; i++) {
+                    int i =0;
+                    do {
                         workspace.command("go");
                         turtles = (Double) workspace.report("count turtles");
+                        i++;
+                    }while((i<3000)&&(turtles>0));
+                    if(turtles >0){
+                        System.out.println(substrate+"\t"+flow+"\t"+turtles);
+                        flow = 0;
                     }
-                    System.out.println(substrate+"\t"+flow+"\t"+turtles);
-                }
-            }
+                    flow--;
+                    //System.out.println(substrate+"\t"+flow+"\t"+turtles);
+                }while(flow>0);
+                substrate = substrate/2;
+            }while (substrate>0);
             workspace.dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
