@@ -62,16 +62,16 @@ end
 to metabolise
   ;; bugs take up resource
   ask turtles[
-    let a 30  ;; holding resource maximum take up
+    let maxuptake 30  ;; holding resource maximum take up
      ask patch-here[
-        ifelse resource > 30[
-          set resource resource - 30
+        ifelse resource > maxuptake[
+          set resource resource - maxuptake
         ][
           set a resource  ;; take up what it can
           set resource 0
         ] 
       ] 
-     set biomass biomass + a ;; add to biomass
+     set biomass biomass + maxuptake ;; add to biomass
   ]
 end
 
@@ -199,6 +199,24 @@ resourceIn
 1
 NIL
 HORIZONTAL
+
+PLOT
+695
+25
+895
+175
+plot 2
+biomass
+NIL
+240.0
+600.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 10.0 1 -16777216 true "" "histogram [biomass] of turtles"
 
 @#$#@#$#@
 ## WHAT IS IT?

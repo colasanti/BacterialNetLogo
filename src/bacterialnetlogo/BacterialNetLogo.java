@@ -26,7 +26,7 @@ public class BacterialNetLogo {
         try {
             workspace.open(
                     "src/bacterialnetlogo/Chemostat.nlogo");
-            int substrate = 1024;
+            int substrate = 225;
             do {
                 int flow = 100;
                 do{
@@ -46,7 +46,7 @@ public class BacterialNetLogo {
                     flow--;
                     //System.out.println(substrate+"\t"+flow+"\t"+turtles);
                 }while(flow>0);
-                substrate = substrate/2;
+                substrate -= 5;
             }while (substrate>0);
             workspace.dispose();
         } catch (Exception ex) {
