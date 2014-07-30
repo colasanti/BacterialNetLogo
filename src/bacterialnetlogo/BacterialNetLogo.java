@@ -26,7 +26,7 @@ public class BacterialNetLogo {
         try {
             workspace.open(
                     "src/bacterialnetlogo/Chemostat.nlogo");
-            int substrate = 150;
+            int substrate = 250;
             do {
                 int flow = 100;
                 do{
