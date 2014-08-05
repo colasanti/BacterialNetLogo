@@ -72,9 +72,10 @@ to metabolise
       set maxuptake 30 * ( s / 447.077118191932 )
     ]
     let newbiomass 0 
+    let currentBiomass biomass
     ask patch-here[
       ifelse model = "Monod" [
-        set newbiomass 30 * ( resource / ( resource + 39 ) )
+        set newbiomass 30 * ( currentBiomass / 500 ) * ( resource / ( resource + 23 ) )
         set resource resource - newbiomass
         if  resource < 0 [
             set resource 0

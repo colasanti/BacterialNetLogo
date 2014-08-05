@@ -23,7 +23,7 @@ public class BacterialNetLogo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        File outFile = new File("data/testdata.cvs");
+        File outFile = new File("data/newMOnodModel050814.cvs");
 
         FileWriter fileWriter;
         try {
@@ -45,7 +45,7 @@ public class BacterialNetLogo {
                     do {
                         workspace.command("set flow " + Integer.toString(flow));
                         workspace.command("set resourcein " + Integer.toString(substrate));
-                        workspace.command("set model \"Saturated\" ");
+                        workspace.command("set model \"Monod\" ");
                         workspace.command("setup");
                         int i = 0;
                         do {
