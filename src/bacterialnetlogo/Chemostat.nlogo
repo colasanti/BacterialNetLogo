@@ -63,28 +63,32 @@ to metabolise
   ;; bugs take up resource
   ask turtles[
     let maxuptake 30  ;; holding resource maximum take up
-    ;;let maxuptake 30 * ( biomass / 500 ) ;; holding resource maximum take up
-    ;; let r ( biomass / 4.18879020478639 ) ^ ( 1 / 3 )
-    ;; let s 12.5663706143592 * ( r ^ 2 ) 
-    ;; let maxuptake 30 * ( s / 447.077118191932 )
-    
+    if model = "Biomass" [
+      set maxuptake 30 * ( biomass / 500 )
+    ]
+    if model = "Surface" [
+      let r ( biomass / 4.18879020478639 ) ^ ( 1 / 3 )
+      let s 12.5663706143592 * ( r ^ 2 ) 
+      set maxuptake 30 * ( s / 447.077118191932 )
+    ]
     let newbiomass 0 
     ask patch-here[
-    ;;    ifelse resource > maxuptake[
-    ;;       set resource resource - maxuptake
-    ;;
-    ;;    ][
-    ;;      set newbiomass  resource  ;; take up what it can
-    ;;      set resource 0
-    ;;    ] 
-    ;;  ]
-        set newbiomass 30 * ( resource / ( resource + 30 ) )
+      ifelse model = "Monod" [
+        set newbiomass 30 * ( resource / ( resource + 39 ) )
         set resource resource - newbiomass
         if  resource < 0 [
             set resource 0
         ]
-
-    ]
+      ][
+        ifelse resource > maxuptake[
+           set resource resource - maxuptake
+           set newbiomass maxuptake
+        ][
+          set newbiomass  resource  ;; take up what it can
+          set resource 0
+        ] 
+      ]
+   ]
     set biomass biomass + newbiomass ;; add to biomass
   ]
 end
@@ -175,7 +179,7 @@ flow
 flow
 0
 100
-76
+21
 1
 1
 NIL
@@ -207,8 +211,8 @@ SLIDER
 resourceIn
 resourceIn
 0
-150
-114
+350
+349
 1
 1
 NIL
@@ -231,6 +235,16 @@ false
 "" ""
 PENS
 "default" 10.0 1 -16777216 true "" "histogram [biomass] of turtles"
+
+CHOOSER
+35
+205
+173
+250
+model
+model
+"Saturated" "Biomass" "Surface" "Monod"
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
